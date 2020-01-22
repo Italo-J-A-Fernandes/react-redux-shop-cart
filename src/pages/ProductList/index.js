@@ -4,7 +4,7 @@ import { Row, Col } from "react-grid-system";
 import InputSelect from "../../components/InputSelect";
 import { useSelector } from "react-redux";
 import ProductItem from "../../components/ProductItem";
-import * as ActionsFilter from "../../store/actions/filter";
+import * as ActionsFilter from "../../store/actions/filterListProduct";
 
 function ProductList() {
 
