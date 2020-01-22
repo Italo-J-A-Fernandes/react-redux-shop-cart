@@ -2,14 +2,11 @@ import React from "react";
 import Layout from "../../components/Layout";
 import { Row, Col } from "react-grid-system";
 import InputSelect from "../../components/InputSelect";
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 import ProductItem from "../../components/ProductItem";
 import * as ActionsFilter from "../../store/actions/filterListProduct";
 
-function ProductList() {
-
-    const products = useSelector(state => state.product.data);
-
+function ProductList({products}) {
     return (
         <Layout>
             <Row className="mg-tp-12">
@@ -40,4 +37,4 @@ function ProductList() {
     );
 }
 
-export default ProductList;
+export default connect(state => ({products:state.product.data}))(ProductList);

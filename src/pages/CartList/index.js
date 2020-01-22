@@ -8,9 +8,8 @@ import Separetor from "../../components/Separetor";
 function CartList(){
     const products = useSelector(state => state.cart.data);
     const total = products.reduce((acc,cur) => acc+cur.value,0);
-    console.log('====================================');
-    console.log(products);
-    console.log('====================================');
+
+    console.log(products);   
     
     return (
         <Layout>
