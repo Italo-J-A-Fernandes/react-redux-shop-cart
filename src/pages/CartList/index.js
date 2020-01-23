@@ -1,13 +1,12 @@
 import React from "react";
 import Layout from "../../components/Layout";
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { Row, Col } from "react-grid-system";
 import CartItem from "../../components/CartItem";
 import Separetor from "../../components/Separetor";
+import * as ActionsCart from "../../store/actions/cart"
 
-function CartList(){
-    const products = useSelector(state => state.cart.data);
-    const total = products.reduce((acc,cur) => acc+cur.value,0);
+function CartList({products}){
 
     console.log(products);   
     
@@ -25,11 +24,11 @@ function CartList(){
             <Separetor />
             <Row>
                 <Col>
-                    <p>Total: R$ {total}</p>
+                    <p>Total: R$ {ActionsCart.valorTotoal(products)}</p>
                 </Col>
             </Row>
         </Layout>
     );
 }
 
-export default CartList;
+export default connect(state => ({products:state.cart.data}))(CartList);

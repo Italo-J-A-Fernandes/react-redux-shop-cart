@@ -12,7 +12,7 @@ function handleAddCart(state, product) {
     return {
         ...state,
         total: (dat.length+product.qnt),
-        data: [...dat, product]
+        data: [...dat, product],
     }    
 
 }
