@@ -28,4 +28,8 @@ function CartList({products}){
     );
 }
 
-export default connect(state => ({products:state.cart.data}))(CartList);
+const mapStateToProps = state => ({
+    products: state.cart.data,
+});
+
+export default connect(mapStateToProps)(CartList);

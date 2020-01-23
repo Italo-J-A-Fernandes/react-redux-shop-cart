@@ -37,4 +37,8 @@ function ProductList({products}) {
     );
 }
 
-export default connect(state => ({products:state.product.data}))(ProductList);
+const mapStateToProps = state => ({
+    products: state.product.data,
+});
+
+export default connect(mapStateToProps)(ProductList);
