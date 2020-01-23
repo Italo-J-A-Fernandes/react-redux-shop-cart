@@ -6,10 +6,7 @@ import CartItem from "../../components/CartItem";
 import Separetor from "../../components/Separetor";
 import * as ActionsCart from "../../store/actions/cart"
 
-function CartList({products}){
-
-    console.log(products);   
-    
+function CartList({products}){    
     return (
         <Layout>
             <Row className="mg-tp-12">

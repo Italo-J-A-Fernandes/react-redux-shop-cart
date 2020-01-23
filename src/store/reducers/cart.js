@@ -8,12 +8,10 @@ function handleAddCart(state, product) {
     
     //adicionando o campo qnt no produto
     product["qnt"] = 1;
-
     return {
         ...state,
-        total: (dat.length+product.qnt),
         data: [...dat, product],
-    }    
+    }
 
 }
 

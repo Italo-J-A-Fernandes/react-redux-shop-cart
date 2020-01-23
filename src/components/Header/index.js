@@ -2,12 +2,10 @@ import React from "react";
 import "./style.css"
 import { Container, Row, Col } from "react-grid-system";
 import { FiShoppingBag } from "react-icons/fi";
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-function Header() {
-    const total_cart = useSelector(state => state.cart.total);
-
+function Header({total_cart}) {
     return (
         <>
             <nav>
@@ -31,4 +29,4 @@ function Header() {
     );
 }
 
-export default Header;
+export default connect(state => ({total_cart:state.cart.data.length}))(Header);

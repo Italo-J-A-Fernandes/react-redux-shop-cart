@@ -6,12 +6,15 @@ function CartItem({product}) {
     return (
         <Row>
             <Col md={2}>
-                <div className="photo-item"
-                        style={{backgroundImage:`url(${product.photo})`}}></div>
+                <div className="photo-item" 
+                    style={{backgroundImage:`url(${product.photo})`}}></div>
             </Col>
-            <Col md={8}>
+            <Col md={5}>
                 <p>{product.name}</p>
                 <p>R$ {product.value}</p>
+            </Col>
+            <Col md={3}>
+               <p>{product.qnt}</p>
             </Col>
             <Col md={2}>
                 Remover
