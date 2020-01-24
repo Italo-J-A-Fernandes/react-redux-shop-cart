@@ -12,7 +12,9 @@ function Header({total_cart}) {
                 <Container>
                     <Row>
                         <Col md={10}>
-                            <h2 className="title-nav">Mandala Shop's</h2>    
+                        <Link to="/">
+                            <h2 className="title-nav">Mandala Shop's</h2>
+                        </Link>   
                         </Col>
                         <Col md={2}>
                             <Link to="/cart">
@@ -28,5 +30,7 @@ function Header({total_cart}) {
         </>
     );
 }
-
-export default connect(state => ({total_cart:state.cart.data.length}))(Header);
+const mapStateToProps = state => ({
+    total_cart: state.cart.data.length,
+});
+export default connect(mapStateToProps)(Header);

@@ -5,12 +5,9 @@ const INITIAL_STATE_CART = {
 
 function handleAddCart(state, product) {
     const dat = state.data;
-    
-    //adicionando o campo qnt no produto
-    product["qnt"] = 1;
     return {
         ...state,
-        data: [...dat, product],
+        data: [...dat, {...product, qnt:1}],
     }
 
 }
