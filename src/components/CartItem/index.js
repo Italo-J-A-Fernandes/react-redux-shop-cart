@@ -11,7 +11,7 @@ function CartItem({product, dispatch}) {
                 <div className="photo-item" 
                     style={{backgroundImage:`url(${product.photo})`}}></div>
             </Col>
-            <Col md={5}>
+            <Col md={3}>
                 <p>{product.name}</p>
                 <p>R$ {product.value}</p>
             </Col>
@@ -19,7 +19,10 @@ function CartItem({product, dispatch}) {
                <p>{product.qnt}</p>
             </Col>
             <Col md={2}>
-                <button onClick={() => dispatch(ProductActions.removeItemCart(product))}>
+               <p>subtotal</p>
+            </Col>
+            <Col md={2}>
+                <button onClick={() => dispatch(ProductActions.removeItemCart(product.id))}>
                     Remover
                 </button>
             </Col>
