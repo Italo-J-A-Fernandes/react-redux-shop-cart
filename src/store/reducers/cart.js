@@ -1,25 +1,23 @@
+import produce from 'immer';
+
 const INITIAL_STATE_CART = {
     total:0,
     data:[],
 }
 
 function handleAddCart(state, product) {
-    const dat = state.data;
-    const productIndex = dat.findIndex(p => p.id === product.id);
-    
-    if(productIndex >= 0){
-        dat[productIndex].qnt += 1;
-        return {
-            ...state,
-            data: [...dat]
-        };
-    }else{
-        return {
-            ...state,
-            data: [...dat, {...product, qnt:1}],
-        }
-    }
+    return produce(state, draft => {
+        const productIndex = draft.data.findIndex(p => p.id === product.id); 
 
+        if(productIndex >= 0){
+            draft.data[productIndex].qnt += 1;
+        }else{
+            draft.data.push({
+                ...product,
+                qnt: 1,
+            })
+        }
+    });
 }
 
 function cartReduce(state = INITIAL_STATE_CART, action) {
