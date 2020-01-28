@@ -1,8 +1,10 @@
 import React from "react";
 import { Row, Col } from "react-grid-system";
 import "./style.css";
+import * as ProductActions from "../../store/actions/cart";
+import { connect } from 'react-redux';
 
-function CartItem({product}) {
+function CartItem({product, dispatch}) {
     return (
         <Row>
             <Col md={2}>
@@ -17,10 +19,12 @@ function CartItem({product}) {
                <p>{product.qnt}</p>
             </Col>
             <Col md={2}>
-                Remover
+                <button onClick={() => dispatch(ProductActions.removeItemCart(product))}>
+                    Remover
+                </button>
             </Col>
         </Row>
     );
 }
 
-export default CartItem;
+export default connect()(CartItem);
