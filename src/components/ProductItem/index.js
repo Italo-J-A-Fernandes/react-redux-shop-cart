@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import { formatPrice } from '../../util/format'
 import * as ProductActions from "../../store/actions/cart";
 import { connect } from "react-redux";
 
@@ -11,7 +12,7 @@ function ProductItem({product, dispatch}) {
                 <span>{product.name}</span>
             </div>
             <div className="txt-container">
-                <span>R$ {product.value}</span>
+                <span>{formatPrice(product.value)}</span>
             </div>
             <div className="btn-add" href="#" onClick={()=> dispatch(ProductActions.addProductCart(product))}>Adicionar</div>
         </div>

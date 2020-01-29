@@ -5,7 +5,7 @@ import { FiShoppingBag } from "react-icons/fi";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-function Header({total_cart, itensTotal}) {
+function Header({itensTotal}) {
     return (
         <>
             <nav>

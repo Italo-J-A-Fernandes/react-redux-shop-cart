@@ -1,10 +1,12 @@
 import React from "react";
+import { bindActionCreators } from 'redux';
 import { Row, Col } from "react-grid-system";
+import { formatPrice } from '../../util/format'
 import "./style.css";
 import * as ProductActions from "../../store/actions/cart";
 import { connect } from 'react-redux';
 
-function CartItem({product, dispatch}) {
+function CartItem({product, removeItemCart}) {
     return (
         <Row>
             <Col md={2}>
@@ -13,7 +15,7 @@ function CartItem({product, dispatch}) {
             </Col>
             <Col md={3}>
                 <p>{product.name}</p>
-                <p>R$ {product.value}</p>
+                <p>{formatPrice(product.value)}</p>
             </Col>
             <Col md={3}>
                <p>{product.qnt}</p>
@@ -22,7 +24,7 @@ function CartItem({product, dispatch}) {
                <p>subtotal</p>
             </Col>
             <Col md={2}>
-                <button onClick={() => dispatch(ProductActions.removeItemCart(product.id))}>
+                <button onClick={() => removeItemCart(product.id)}>
                     Remover
                 </button>
             </Col>
@@ -30,4 +32,7 @@ function CartItem({product, dispatch}) {
     );
 }
 
-export default connect()(CartItem);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(ProductActions, dispatch);
+
+export default connect(null, mapDispatchToProps)(CartItem);
