@@ -7,7 +7,6 @@ import CartItem from "../../components/CartItem";
 import Separetor from "../../components/Separetor";
 
 function CartList({products, valorTotoal}){
-    console.log(products)
     return (
         <Layout>
             <Row className="mg-tp-12">
@@ -32,7 +31,11 @@ function CartList({products, valorTotoal}){
 }
 
 const mapStateToProps = state => ({
-    products: state.cart.data,
+    products: state.cart.data.map(products => ({
+        ...products,
+        formatPrice: formatPrice(products.value),
+        subTotal: formatPrice(products.value * products.qnt),
+    })),
     valorTotoal: state.cart.data.reduce((acc,cur) => {
         return parseFloat((acc + cur.value * cur.qnt).toFixed(2))
       }, 0),

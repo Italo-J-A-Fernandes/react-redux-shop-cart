@@ -30,12 +30,29 @@ function handleRemoveCart(state, id){
     });
 }
 
+function handleUpdateCart(state, id, newQnt){
+
+    if(newQnt <= 0){
+        return state;
+    }
+
+    return produce(state, draft => {   
+        const productIndex = draft.data.findIndex(p => p.id === id);
+
+        if(productIndex >= 0){
+            draft.data[productIndex].qnt = Number(newQnt)
+        }
+    });
+}
+
 function cartReduce(state = INITIAL_STATE_CART, action) {
     switch (action.type) {
         case 'ADD_CART':
             return handleAddCart(state, action.product);
         case 'REMOVE_FROM_CART':
             return handleRemoveCart(state, action.id);
+        case 'UPDATE_QNT_CART':
+            return handleUpdateCart(state, action.id, action.qnt);
         default:
             return state;
     }
