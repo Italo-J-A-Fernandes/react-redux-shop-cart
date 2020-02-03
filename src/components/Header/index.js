@@ -5,7 +5,7 @@ import { FiShoppingBag } from "react-icons/fi";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-function Header({total_cart}) {
+function Header({itensTotal}) {
     return (
         <>
             <nav>
@@ -19,7 +19,7 @@ function Header({total_cart}) {
                         <Col md={2}>
                             <Link to="/cart">
                                 <div className="bag-container">
-                                    <span className="bag-itens">{total_cart}</span>
+                                    <span className="bag-itens">{itensTotal}</span>
                                     <FiShoppingBag size={24} color="#fff" />   
                                 </div>
                             </Link>
@@ -31,6 +31,8 @@ function Header({total_cart}) {
     );
 }
 const mapStateToProps = state => ({
-    total_cart: state.cart.data.length,
+    itensTotal: state.cart.data.reduce((total, prod) => {
+        return total + prod.qnt;
+    }, 0),
 });
 export default connect(mapStateToProps)(Header);

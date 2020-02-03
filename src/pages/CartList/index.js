@@ -1,12 +1,12 @@
 import React from "react";
 import Layout from "../../components/Layout";
+import { formatPrice } from '../../util/format';
 import { connect } from "react-redux";
 import { Row, Col } from "react-grid-system";
 import CartItem from "../../components/CartItem";
 import Separetor from "../../components/Separetor";
-import * as ActionsCart from "../../store/actions/cart"
 
-function CartList({products}){
+function CartList({products, valorTotoal}){
     return (
         <Layout>
             <Row className="mg-tp-12">
@@ -15,13 +15,15 @@ function CartList({products}){
                 </Col>
             </Row>
             <Separetor />
-            {products.map(product => (
-                <CartItem key={product.id} product={product} />
-            ))}
+                {products.length === 0 && <div>Carrinho Vazio!</div>}
+                
+                {products.length > 0 && products.map(product => (
+                    <CartItem key={product.id} product={product} />
+                ))}
             <Separetor />
             <Row>
                 <Col>
-                    <p>Total: R$ {ActionsCart.valorTotoal(products)}</p>
+                    <p>Total: {formatPrice(valorTotoal)}</p>
                 </Col>
             </Row>
         </Layout>
@@ -29,7 +31,14 @@ function CartList({products}){
 }
 
 const mapStateToProps = state => ({
-    products: state.cart.data,
+    products: state.cart.data.map(products => ({
+        ...products,
+        formatPrice: formatPrice(products.value),
+        subTotal: formatPrice(products.value * products.qnt),
+    })),
+    valorTotoal: state.cart.data.reduce((acc,cur) => {
+        return parseFloat((acc + cur.value * cur.qnt).toFixed(2))
+      }, 0),
 });
 
 export default connect(mapStateToProps)(CartList);
