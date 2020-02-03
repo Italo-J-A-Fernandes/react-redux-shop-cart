@@ -1,3 +1,5 @@
+import produce from 'immer';
+
 const INITIAL_STATE_PRODUCT = {
     data:[
         {
@@ -39,6 +41,28 @@ const INITIAL_STATE_PRODUCT = {
     ]
 };
 
+function handleOrdemProduct(state, valor){
+    if(valor === "1"){
+        return produce(state, draft => {
+            draft.data.sort(function(a,b){
+                return a.value - b.value;
+            });
+        })
+    }else if(valor === "2"){
+        return produce(state, draft => {
+            draft.data.sort(function(a,b){
+                return b.value - a.value;
+            });
+        })
+    }
+    
+    return produce(state, draft => {
+        draft.data.sort(function(a,b){
+            return a.id - b.id;
+        });
+    })
+}
+
 function productReduce(state = INITIAL_STATE_PRODUCT, action){
     switch (action.type) {
         case 'ADD_PRODCUT':
@@ -46,6 +70,8 @@ function productReduce(state = INITIAL_STATE_PRODUCT, action){
         case 'REMOVE_PRODUCT':
 
             break;
+        case 'FILTER_PRODUCTS':
+            return handleOrdemProduct(state, action.value);
         default:
             return state;
     }

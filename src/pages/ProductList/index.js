@@ -2,11 +2,12 @@ import React from "react";
 import Layout from "../../components/Layout";
 import { Row, Col } from "react-grid-system";
 import InputSelect from "../../components/InputSelect";
+import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
 import ProductItem from "../../components/ProductItem";
 import * as ActionsFilter from "../../store/actions/filterListProduct";
 
-function ProductList({products}) {
+function ProductList({products, filterProd}) {
     return (
         <Layout>
             <Row className="mg-tp-12">
@@ -14,7 +15,7 @@ function ProductList({products}) {
                     <h2 className="title-page">Produtos</h2>
                 </Col>
                 <Col md={2}>
-                    <InputSelect handleSelect={ActionsFilter.handleFilter}>
+                    <InputSelect handleSelect={filterProd}>
                         <option>Selecione um filtro</option>
                         <option value="1">Menor preço</option>
                         <option value="2">Maior preço</option>
@@ -36,9 +37,11 @@ function ProductList({products}) {
         </Layout>
     );
 }
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(ActionsFilter, dispatch);
 
 const mapStateToProps = state => ({
     products: state.product.data,
 });
 
-export default connect(mapStateToProps)(ProductList);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductList);

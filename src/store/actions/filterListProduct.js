@@ -1,3 +1,6 @@
-export function handleFilter(value) {
-  console.log(value);
+export function filterProd(value) {
+  return{
+    type:'FILTER_PRODUCTS',
+    value,
+  }
 }
